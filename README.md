@@ -15,6 +15,17 @@
 | 热点早报 | 工作日早晨热点摘要 |
 | 招聘雷达 | 广州 / 深圳前端社招 |
 
+## 同步
+
+Bot 按 [content/README.md](content/README.md) 的约定，把当日摘要写成 Markdown 直接提交到 `content/`：
+
+| bot-id | 名称 |
+|--------|------|
+| `hotspot-morning` | 热点早报 |
+| `job-radar` | 招聘雷达 |
+
+路径：`content/<bot-id>/YYYY-MM-DD.md`。提交信息：`content(<bot-id>): YYYY-MM-DD`。优先直写 `main`。
+
 ## 状态
 
-仓库已初始化，应用与同步管道待接入。
+内容目录与写入约定已就绪；站点应用与同步管道待接入。
