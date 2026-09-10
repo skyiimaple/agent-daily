@@ -18,6 +18,16 @@ out/
 dist/
 build/
 
+# VitePress
+**/.vitepress/cache/
+**/.vitepress/dist/
+web/node_modules/
+web/.vitepress/cache/
+web/.vitepress/dist/
+
+# generated digest pages (copied from /content by web/scripts/sync-content.mjs)
+web/digests/
+
 # Vercel
 .vercel/
 

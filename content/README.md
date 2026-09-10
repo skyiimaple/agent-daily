@@ -8,13 +8,14 @@ Grok Bot 把当日摘要写成 Markdown，直接提交到本目录。站点之�
 content/<bot-id>/YYYY-MM-DD.md
 ```
 
-每个 bot 每天一份。同一天多次运行时，覆盖当天文件即可。只有需要保留同日多次版本时，才用 `YYYY-MM-DD-HHmm.md`。
+每个 bot 每天一份。同一天多次运行时，覆盖当天文件即可。只有需要保留同日多次版本时，才用 `YYYY-MM-DD-HHmm.md`（文件名里带空格也可以，例如 `YYYY-MM-DD HH:mm.md`）。站点渲染时会跳过 `_example.md` 与 `.gitkeep`，并把空格文件名转成安全 URL；Bot 仍按本目录原路径提交，不要写到 `web/`。
 
 ## Bot id
 
 | bot-id | 名称 |
 |--------|------|
 | `hotspot-morning` | 热点早报 |
+| `hotspot-evening` | 热点晚报 |
 | `job-radar` | 招聘雷达 |
 
 ## Frontmatter
@@ -23,7 +24,7 @@ content/<bot-id>/YYYY-MM-DD.md
 
 ```yaml
 ---
-bot: hotspot-morning  # 或 job-radar
+bot: hotspot-morning  # 或 hotspot-evening / job-radar
 title: 热点早报 · 2026-09-09
 date: 2026-09-09
 source: grok-bot
