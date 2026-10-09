@@ -11,6 +11,18 @@ export const CONTENT_DEST = path.join(WEB_ROOT, 'digests')
 
 /** Known bot-ids. Unknown directories under content/ still get listed. */
 export const BOT_META = {
+  github: {
+    name: 'GitHub',
+    desc: '开源项目精选日报',
+  },
+  huggingface: {
+    name: 'Hugging Face',
+    desc: '模型 / 数据集 / Space 精选',
+  },
+  skills: {
+    name: 'Skills',
+    desc: 'Agent Skills 精选',
+  },
   'hotspot-morning': {
     name: '热点早报',
     desc: '工作日早晨热点摘要',
@@ -25,7 +37,14 @@ export const BOT_META = {
   },
 }
 
-const BOT_ORDER = ['hotspot-morning', 'hotspot-evening', 'job-radar']
+const BOT_ORDER = [
+  'github',
+  'huggingface',
+  'skills',
+  'hotspot-morning',
+  'hotspot-evening',
+  'job-radar',
+]
 
 const SKIP_NAMES = new Set(['.gitkeep', 'README.md'])
 

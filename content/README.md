@@ -14,6 +14,9 @@ content/<bot-id>/YYYY-MM-DD.md
 
 | bot-id | 名称 |
 |--------|------|
+| `github` | GitHub |
+| `huggingface` | Hugging Face |
+| `skills` | Skills |
 | `hotspot-morning` | 热点早报 |
 | `hotspot-evening` | 热点晚报 |
 | `job-radar` | 招聘雷达 |

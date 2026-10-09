@@ -61,6 +61,9 @@ npm run docs:preview  # 预览生产构建
 
 | 路径 | bot-id | 说明 |
 | --- | --- | --- |
+| `/github/` | `github` | GitHub |
+| `/huggingface/` | `huggingface` | Hugging Face |
+| `/skills/` | `skills` | Skills |
 | `/hotspot-morning/` | `hotspot-morning` | 热点早报 |
 | `/hotspot-evening/` | `hotspot-evening` | 热点晚报 |
 | `/job-radar/` | `job-radar` | 招聘雷达 |
