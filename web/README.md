@@ -9,8 +9,10 @@
 1. 扫描仓库根目录 `../content/<bot-id>/*.md`
 2. 跳过 `_example.md`、`.gitkeep`、`README.md` 以及点开头文件
 3. 把文件复制到 `web/digests/<bot-id>/`，并把文件名里的空格、冒号等转成 URL 安全 slug  
-   例：`2026-09-10 08:30.md` → `/hotspot-morning/2026-09-10-08-30.html`
-4. 为每个 bot 生成索引页；VitePress `rewrites` 把 `digests/` 映射成 `/:bot-id/` 路由
+   例：`2026-09-10 08:30.md` → `/hotspot-morning/2026-09-10-08-30.html`  
+   例：`2026-10-10 daily.md` → `/github/2026-10-10-daily.html`
+4. 若存在 `content/<bot-id>/assets/`，一并复制到 `digests/<bot-id>/assets/`，保留正文里 `./assets/...` 相对图片路径
+5. 为每个 bot 生成索引页；VitePress `rewrites` 把 `digests/` 映射成 `/:bot-id/` 路由
 
 `web/digests/` 是生成物，不要手改，也不要让 Bot 写到这里。源文件永远在仓库根 `content/`。
 

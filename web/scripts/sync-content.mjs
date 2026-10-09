@@ -2,10 +2,22 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
+  CONTENT_SRC,
   CONTENT_DEST,
   collectDigests,
   renderBotIndex,
 } from './content.mjs'
+
+/** Copy content/<bot>/assets into digests/<bot>/assets when present. */
+export function copyBotAssets(botId) {
+  const assetsSrc = path.join(CONTENT_SRC, botId, 'assets')
+  if (!fs.existsSync(assetsSrc) || !fs.statSync(assetsSrc).isDirectory()) {
+    return false
+  }
+  const assetsDest = path.join(CONTENT_DEST, botId, 'assets')
+  fs.cpSync(assetsSrc, assetsDest, { recursive: true })
+  return true
+}
 
 export function syncContent() {
   fs.rmSync(CONTENT_DEST, { recursive: true, force: true })
@@ -18,6 +30,9 @@ export function syncContent() {
     for (const item of bot.items) {
       fs.copyFileSync(item.absPath, path.join(destDir, `${item.slug}.md`))
     }
+    // Keep relative image paths like ./assets/YYYY-MM-DD/foo.png resolvable
+    // after digests land under web/digests/<bot-id>/.
+    copyBotAssets(bot.botId)
     fs.writeFileSync(path.join(destDir, 'index.md'), renderBotIndex(bot), 'utf8')
   }
 
@@ -31,7 +46,11 @@ const isDirectRun =
 if (isDirectRun) {
   const bots = syncContent()
   const count = bots.reduce((n, bot) => n + bot.items.length, 0)
+  const withAssets = bots.filter((bot) =>
+    fs.existsSync(path.join(CONTENT_DEST, bot.botId, 'assets')),
+  ).length
   console.log(
-    `synced ${count} digest(s) across ${bots.length} bot(s) -> ${path.relative(process.cwd(), CONTENT_DEST) || '.'}`,
+    `synced ${count} digest(s) across ${bots.length} bot(s)` +
+      ` (${withAssets} with assets) -> ${path.relative(process.cwd(), CONTENT_DEST) || '.'}`,
   )
 }
