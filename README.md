@@ -42,7 +42,7 @@ Bot 按 [content/README.md](content/README.md) 的约定，把当日摘要写成
 | `hotspot-evening` | 热点晚报 |
 | `job-radar` | 招聘雷达 |
 
-路径：`content/<bot-id>/YYYY-MM-DD.md`（同日多次版本可用 `YYYY-MM-DD HH:mm.md`）。提交信息：`content(<bot-id>): YYYY-MM-DD`。优先直写 `main`。
+路径：`content/<bot-id>/YYYY-MM-DD.md`（同日多次可用 `YYYY-MM-DD HH:mm.md`）；GitHub / Hugging Face / Skills 用 `YYYY-MM-DD daily.md` / `YYYY-MM-DD weekly.md`，title 日期在前。提交信息：`content(<bot-id>): YYYY-MM-DD`。优先直写 `main`。
 
 ## 部署
 
