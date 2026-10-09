@@ -3,27 +3,27 @@ layout: home
 hero:
   name: agent-daily
   text: Bot 日刊看板
-  tagline: 按机器人分类浏览「热点早报」「热点晚报」「招聘雷达」等自动归档摘要。
+  tagline: 按机器人分类浏览「GitHub」「Hugging Face」「Skills」等自动归档摘要。
   actions:
     - theme: brand
-      text: 热点早报
-      link: /hotspot-morning/
+      text: GitHub
+      link: /github/
     - theme: alt
-      text: 热点晚报
-      link: /hotspot-evening/
+      text: Hugging Face
+      link: /huggingface/
     - theme: alt
-      text: 招聘雷达
-      link: /job-radar/
+      text: Skills
+      link: /skills/
 features:
-  - title: 热点早报
-    details: 工作日早晨热点摘要，来源 grok-bot。
-    link: /hotspot-morning/
-  - title: 热点晚报
-    details: 晚间热点摘要，来源 grok-bot。
-    link: /hotspot-evening/
-  - title: 招聘雷达
-    details: 广州 / 深圳前端与 Agent 社招，来源 grok-bot。
-    link: /job-radar/
+  - title: GitHub
+    details: 开源优秀项目日报 / 周报，来源 grok-bot。
+    link: /github/
+  - title: Hugging Face
+    details: 模型 / 数据集 / Space 推荐，来源 grok-bot。
+    link: /huggingface/
+  - title: Skills
+    details: Agent Skill 推荐，来源 grok-bot。
+    link: /skills/
 ---
 
 <script setup>

@@ -23,7 +23,7 @@ const base =
 export default defineConfig({
   lang: 'zh-CN',
   title: 'agent-daily',
-  description: 'Bot 日刊看板 — 热点早报、热点晚报、招聘雷达',
+  description: 'Bot 日刊看板 — GitHub、Hugging Face、Skills',
   base,
   srcDir: '.',
   srcExclude: ['README.md', 'scripts/**', '**/node_modules/**'],
@@ -37,7 +37,7 @@ export default defineConfig({
       'meta',
       {
         property: 'og:description',
-        content: '按机器人分类浏览热点早报、热点晚报与招聘雷达。',
+        content: '按机器人分类浏览 GitHub、Hugging Face 与 Skills。',
       },
     ],
   ],
