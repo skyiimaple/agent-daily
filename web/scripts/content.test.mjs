@@ -6,6 +6,7 @@ import {
   slugFromFilename,
   isPublishableMarkdown,
   dateSortKey,
+  CONTENT_SRC,
   CONTENT_DEST,
 } from './content.mjs'
 import { syncContent, copyBotAssets } from './sync-content.mjs'
@@ -54,4 +55,48 @@ test('sync copies bot assets next to digests', () => {
   assert.ok(fs.existsSync(asset), `expected asset at ${asset}`)
   assert.equal(copyBotAssets('github'), true)
   assert.equal(copyBotAssets('__no_such_bot__'), false)
+})
+
+/** Mask fenced and inline code so placeholders inside spans are ignored. */
+function maskCode(text) {
+  const mask = (chunk) => chunk.replace(/[^\n]/g, ' ')
+  return text
+    .replace(/```[\s\S]*?```/g, mask)
+    .replace(/~~~[\s\S]*?~~~/g, mask)
+    .replace(/`[^`\n]*`/g, mask)
+}
+
+function rawOpenTags(text) {
+  const hits = []
+  const lines = maskCode(text).split('\n')
+  const tagRe = /<([A-Za-z][\w:-]*)\b[^>\n]*?>/g
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].replace(/<(?:https?:\/\/|mailto:)[^>\n]+>/gi, ' ')
+    for (const match of line.matchAll(tagRe)) {
+      if (match[0].endsWith('/>')) continue
+      hits.push(`${i + 1}:${match.index + 1} ${match[0]}`)
+    }
+  }
+  return hits
+}
+
+test('publishable digests have no raw HTML tags outside code', () => {
+  const hits = []
+  for (const bot of fs.readdirSync(CONTENT_SRC, { withFileTypes: true })) {
+    if (!bot.isDirectory()) continue
+    const botDir = path.join(CONTENT_SRC, bot.name)
+    for (const name of fs.readdirSync(botDir)) {
+      if (!isPublishableMarkdown(name)) continue
+      const file = path.join(botDir, name)
+      for (const hit of rawOpenTags(fs.readFileSync(file, 'utf8'))) {
+        hits.push(`${path.relative(CONTENT_SRC, file)}:${hit}`)
+      }
+    }
+  }
+  assert.deepEqual(
+    hits,
+    [],
+    'Wrap placeholders like <project> in a code span so VitePress does not parse them as tags:\n' +
+      hits.join('\n'),
+  )
 })
